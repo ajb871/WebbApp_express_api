@@ -2,8 +2,33 @@
 <html>
 <head>
 	<title>sun</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-	<p>lightweight express app using API and templating with EJS</p>
-</body>
-</html>
+
+	<div class="loc-form">
+		<p>Enter Longitude &amp; Latitude:</p>
+		<!-- User input form -->
+		<form action="/" method="post" align="center">
+			<input type="text" name="latitude">
+			<input type="text" name="longitude">
+			<input type="submit" name="submit-loc">
+		</form>
+
+		<!-- Once a response is recieved -->
+		<% if(sun_data != null){ %>
+		<p>sunrise: <%= sun_data.results.sunrise %></p>
+		<p>sunset: <%= sun_data.results.sunset %></p>
+			<!-- Script for dynamic background -->
+			<script type="text/javascript">
+				//Create JS variable from returned data
+				var sunset_js = <%-JSON.stringify(sun_data)%>;
+				let date = new Date();
+				setInterval(()=>console.log(sunset_js), 5000);
+				console.log(date);
+			</script>
+		<% } %>	
+	</div>
+
+	</body>
+	</html>
