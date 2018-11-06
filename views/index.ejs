@@ -17,16 +17,20 @@
 
 		<!-- Once a response is recieved -->
 		<% if(sun_data != null){ %>
-		<p>sunrise: <%= sun_data.results.sunrise %></p>
-		<p>sunset: <%= sun_data.results.sunset %></p>
+		<h2> time until <%= sun_data.type %> : </h2>
+		<h3> <%= sun_data.timeDiff[0] %> hours and <%= sun_data.timeDiff[1] %> minutes </h3>
+		<p> {at <%= sun_data.timeEvent[0] %>:<%= sun_data.timeEvent[1] %> <%= sun_data.timeEnd %>} </p>
 			<!-- Script for dynamic background -->
 			<script type="text/javascript">
-				//Create JS variable from returned data
 				var sunset_js = <%-JSON.stringify(sun_data)%>;
-				let date = new Date();
-				setInterval(()=>console.log(sunset_js), 5000);
-				console.log(date);
+				let hourDiff = sunset_js.timeDiff[0];
+				if(hourDiff < 3){
+					document.body.style.backgroundColor = 'orange';
+				}
 			</script>
+
+			<p> <%= %> </p>
+
 		<% } %>	
 	</div>
 
